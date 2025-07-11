@@ -10,7 +10,7 @@ pipeline {
     stage('Clonar repo') {
       steps {
         git branch: 'main',
-            url: 'https://github.com/TU_USUARIO/superchargesite.git'
+            url: 'https://github.com/JavierSerranoAlvarado/superpower.git'
       }
     }
 
@@ -45,14 +45,4 @@ pipeline {
     }
   }
 
-  post {
-    success {
-      echo '¡Build y deploy exitosos! 😈'
-    }
-    failure {
-      mail to: 'contacto@javiersadev.com',
-           subject: "Pipeline FALLÓ: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-           body: "Revisa los logs y reintenta, mi ciela."
-    }
-  }
 }
