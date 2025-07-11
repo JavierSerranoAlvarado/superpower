@@ -19,10 +19,10 @@ pipeline {
         withCredentials([usernamePassword(credentialsId: env.CRED_ID,
                                          usernameVariable: 'AEM_USER',
                                          passwordVariable: 'AEM_PASS')]) {
-          sh """
-            mvn clean install -PautoInstallPackage \
-              -Daem.host=${AEM_HOST} \
-              -Daem.user=${AEM_USER} \
+          bat """
+            mvn clean install -PautoInstallPackage ^
+              -Daem.host=${AEM_HOST} ^
+              -Daem.user=${AEM_USER} ^
               -Daem.password=${AEM_PASS}
           """
         }
@@ -34,10 +34,10 @@ pipeline {
         withCredentials([usernamePassword(credentialsId: env.CRED_ID,
                                          usernameVariable: 'DISP_USER',
                                          passwordVariable: 'DISP_PASS')]) {
-          sh """
-            curl -X POST "http://DISPATCHER_SERVER:80/dispatcher/invalidate.cache" \
-              -u ${DISP_USER}:${DISP_PASS} \
-              -H "Content-Type: application/json" \
+          bat """
+            curl -X POST "http://DISPATCHER_SERVER:80/dispatcher/invalidate.cache" ^
+              -u ${DISP_USER}:${DISP_PASS} ^
+              -H "Content-Type: application/json" ^
               -d '{"path":["/content/tu-sitio"]}'
           """
         }
